@@ -1,7 +1,9 @@
 package com.example.lab1;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -13,9 +15,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.FileOutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
         put("Blush", "Imbujorare :))");
     }};
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +63,21 @@ public class MainActivity extends AppCompatActivity {
                 simpleText.setText(desc);
             }
         });
+        SaveFileToInternalStorage();
+    }
+
+    // lab 5 internal storage pentru produse si descrierea lor
+    protected void SaveFileToInternalStorage() {
+        FileOutputStream fos;
+        try {
+            fos = openFileOutput("saveinfo.txt", Context.MODE_PRIVATE);
+            byte[] content = description.toString().getBytes();
+            fos.write(content);
+            Log.i("Save","File saved!");
+            fos.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -76,14 +96,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         Log.d("lifecycle", "sunt in onResume");
-
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        Log.d("lifecycle", "sunt in onPause");
 
+        Log.d("lifecycle", "sunt in onPause");
     }
 
     @Override
@@ -96,6 +115,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+
         Log.d("lifecycle", "sunt in onDestoy");
 
     }
@@ -151,10 +171,15 @@ public class MainActivity extends AppCompatActivity {
                 dialog.show();
                 return true;
 
+            case R.id.settings:
+                //lab 5
+                Intent settingsIntent = new Intent(this, SettingsActivity.class);
+                startActivity(settingsIntent);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
 
-    }
+}
