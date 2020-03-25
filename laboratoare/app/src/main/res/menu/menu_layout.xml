@@ -4,7 +4,5 @@
         android:title="Text us" />
     <item android:id="@+id/rate"
         android:title="Rate us" />
-    <item android:id="@+id/settings"
-        android:title="Settings" />
 
 </menu>
