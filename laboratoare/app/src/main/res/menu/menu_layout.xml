@@ -6,5 +6,9 @@
         android:title="Rate us" />
     <item android:id="@+id/settings"
         android:title="Settings" />
+    <item android:id="@+id/sensors"
+        android:title="See sensors" />
+    <item android:id="@+id/location"
+        android:title="Get location" />
 
 </menu>
