@@ -268,7 +268,11 @@ public class MainActivity extends AppCompatActivity {
                     newdialog.show();
                 } else
                     requestPermissions();
-
+                return true;
+            case R.id.camera:
+                //lab 7
+                Intent cameraIntent = new Intent(this, CameraActivity.class);
+                startActivity(cameraIntent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

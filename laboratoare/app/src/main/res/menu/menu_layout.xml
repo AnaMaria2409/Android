@@ -10,5 +10,7 @@
         android:title="See sensors" />
     <item android:id="@+id/location"
         android:title="Get location" />
+    <item android:id="@+id/camera"
+        android:title="Take picture" />
 
 </menu>
